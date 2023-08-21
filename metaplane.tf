@@ -44,8 +44,9 @@ resource "snowflake_warehouse_grant" "grant-to-metaplane-wh" {
   privilege      = "usage"
 
   roles = [snowflake_role.metaplane-role.name]
+  depends_on= [snowflake_warehouse.metaplane-obs-wh]
 }
-
+/*
 resource "snowflake_database_grant" "grant-imported-privileges-snowflake-db" {
     database_name = "SNOWFLAKE"
     privilege     = "IMPORTED PRIVILEGES"
@@ -53,7 +54,7 @@ resource "snowflake_database_grant" "grant-imported-privileges-snowflake-db" {
      snowflake_role.metaplane-role.name
     ]
 }
-
+*/
 
 resource "snowflake_database_grant" "db-grant-prod" {
   database_name = "MONITOR_DB"
@@ -71,27 +72,54 @@ resource "snowflake_database_grant" "db-grant-qa" {
 
 
 
-data "snowflake_schemas" "sc1" {
-  database = "MONITOR_DB"
-}
+
 
 locals {
-   schema_prod = toset([
-  for schema in data.snowflake_schemas.sc1 :
-  schema.name
-  if (schema.name!="INFORMATION_SCHEMA")
-  ])
-}
-resource "snowflake_schema_grant" "sc_grant" {
-  for_each      = local.schema_prod
-  database_name = "PROD"
+   schema_names =toset(["TEST1","TEST2","TEST3"])
+  }
+
+
+resource "snowflake_schema_grant" "prod-sc-grant" {
+  for_each      = local.schema_names
+  database_name = "MONITOR_DB"
   schema_name   = each.value
-
   privilege = "USAGE"
-
   roles  = [snowflake_role.metaplane-role.name]
-
-  depends_on = [
-    data.snowflake_schemas.sc1
-  ]
 }
+
+
+resource "snowflake_table_grant" "future-grant-table-prod" {
+    for_each=local.schema_names
+    database_name = "MONITOR_DB"
+    schema_name = each.value
+    privilege = "SELECT"
+    roles     = [snowflake_role.metaplane-role.name]
+    on_future         = true    
+}
+
+resource "snowflake_view_grant" "future-grant-view-prod" {
+    for_each=local.schema_names
+    database_name = "MONITOR_DB"
+    schema_name = each.value
+    privilege = "SELECT"
+    roles     = [snowflake_role.metaplane-role.name]
+    on_future         = true    
+}
+/*
+resource "snowflake_view_grant" "selectall-view-prod" {
+    for_each=local.schema_names
+    database_name = "MONITOR_DB"
+    schema_name = each.value
+    privilege = "SELECT"
+    roles     = [snowflake_role.metaplane-role.name]
+    on_all         = true    
+}
+
+resource "snowflake_table_grant" "selectall-table-prod" {
+    for_each=local.schema_names
+    database_name = "MONITOR_DB"
+    schema_name = each.value
+    privilege = "SELECT"
+    roles     = [snowflake_role.metaplane-role.name]
+    on_all         = true    
+} */
