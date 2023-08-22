@@ -70,10 +70,6 @@ resource "snowflake_database_grant" "db-grant-qa" {
   roles     = [snowflake_role.metaplane-role.name]
 }
 
-
-
-
-
 locals {
    schema_names =toset(["TEST1","TEST2","TEST3"])
   }
