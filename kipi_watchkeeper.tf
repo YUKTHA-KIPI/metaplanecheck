@@ -19,7 +19,7 @@ resource "snowflake_resource_monitor" "watchkeeper-monitor" {
     credit_quota = 15
 
     frequency       = "MONTHLY"
-    start_timestamp = "IMMEDIATELY"
+    //start_timestamp = "IMMEDIATELY"
 
     notify_triggers           = [50,60]
     suspend_trigger           = 70
