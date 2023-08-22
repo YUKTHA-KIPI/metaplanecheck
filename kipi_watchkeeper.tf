@@ -54,9 +54,9 @@ resource "snowflake_resource_monitor" "watchkeeper-monitor" {
     frequency       = "MONTHLY"
     start_timestamp = "IMMEDIATELY"
 
-    notify_trigger           = [50,60]
-    suspend_trigger           = [70]
-    suspend_immediate_trigger = [80]
+    notify_triggers           = [50,60]
+    suspend_trigger           = 70
+    suspend_immediate_trigger = 80
 
     notify_users = ["TERRAFORM"]
 }
