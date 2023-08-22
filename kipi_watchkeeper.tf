@@ -28,7 +28,19 @@ resource "snowflake_resource_monitor" "watchkeeper-monitor" {
     notify_users = ["TERRAFORM"]
 }
 
+resource "snowflake_resource_monitor" "new-monitor" {
+    name         = "WH_RM"
+    credit_quota = 15
 
+    frequency       = "MONTHLY"
+    start_timestamp = "2023-08-23T00:00:00Z"
+
+    notify_triggers           = [50,60]
+    suspend_trigger           = 70
+    suspend_immediate_trigger = 80
+
+    notify_users = ["TERRAFORM"]
+}
 //WH CREATION
 resource "snowflake_warehouse" "watchkeeper-wh" {
     name           = "MONITOR_WH"
@@ -196,7 +208,7 @@ resource "snowflake_view_grant" "future-grant-view-wk" {
     //depends_on = [snowflake_database.watchkeeper-db]
 }
 
-/*
+
 /////////////////////third push
 //schema creation
 resource "snowflake_schema" "wk-schema1" {
@@ -223,4 +235,4 @@ resource "snowflake_schema" "wk-schema4" {
   //depends_on = [snowflake_database.watchkeeper-db]
 }
 
-*/
+
