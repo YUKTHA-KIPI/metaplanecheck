@@ -33,7 +33,7 @@ resource "snowflake_resource_monitor" "new-monitor" {
     credit_quota = 15
 
     frequency       = "MONTHLY"
-    start_timestamp = "2023-08-23T00:00:00Z"
+    //start_timestamp = "2023-08-23T00:00:00Z"
 
     notify_triggers           = [50,60]
     suspend_trigger           = 70
