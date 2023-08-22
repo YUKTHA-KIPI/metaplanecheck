@@ -13,6 +13,72 @@ resource "snowflake_role" "watchkeeper-task-role" {
 }
 
 
+//RM CREATION
+resource "snowflake_resource_monitor" "watchkeeper-monitor" {
+    name         = "MONITOR_WH_RM"
+    credit_quota = 15
+
+    frequency       = "MONTHLY"
+    start_timestamp = "IMMEDIATELY"
+
+    notify_triggers           = [50,60]
+    suspend_trigger           = 70
+    suspend_immediate_trigger = 80
+
+    notify_users = ["TERRAFORM"]
+}
+
+
+//WH CREATION
+resource "snowflake_warehouse" "watchkeeper-wh" {
+    name           = "MONITOR_WH"
+    warehouse_size = "XSMALL"
+    warehouse_type = "STANDARD" 
+    auto_suspend = 60
+    auto_resume = true
+    initially_suspended = true
+    //resource_monitor="MONITOR_WH_RM"
+    max_concurrency_level = 30
+    statement_timeout_in_seconds = 300
+    statement_queued_timeout_in_seconds = 1200
+    comment="for watchkeeper usage"
+    //depends_on = [snowflake_resource_monitor.watchkeeper-monitor]
+}
+
+//DB CREATION
+resource "snowflake_database" "watchkeeper-db" {
+  name                        = "MONITOR_DB"
+  comment                     = "Database for watchkeeper accelerator"
+}
+
+// SNOWFLAKE DB GRANTS
+resource "snowflake_database_grant" "grant-imported-privileges-snowflake-WK" {
+    database_name = "SNOWFLAKE"
+    privilege     = "IMPORTED PRIVILEGES"
+    roles = [
+        snowflake_role.watchkeeper-admin-role.name,
+        snowflake_role.watchkeeper-user-role.name,
+        snowflake_role.watchkeeper-task-role.name
+    ]
+}
+
+
+//TASK GRANT
+resource "snowflake_account_grant" "acct-wk-grant1" {
+  roles             = [snowflake_role.watchkeeper-admin-role.name,snowflake_role.watchkeeper-task-role.name]
+  privilege         = "EXECUTE TASK"
+}
+
+//managed task grant
+resource "snowflake_account_grant" "acct-wk-grant2" {
+  roles             = [snowflake_role.watchkeeper-admin-role.name,snowflake_role.watchkeeper-task-role.name]
+  privilege         = "EXECUTE MANAGED TASK"
+}
+
+
+/*
+////////////////////////////////second push
+
 //ADMIN ROLE GRANTS
 resource "snowflake_role_grants" "grant-watchkeeper-admin" {
     role_name = snowflake_role.watchkeeper-admin-role.name
@@ -44,55 +110,6 @@ resource "snowflake_role_grants" "grant-watchkeeper-taskadmin" {
         "ACCOUNTADMIN"
     ] 
     users = ["TERRAFORM"]
-}
-
-//RM CREATION
-resource "snowflake_resource_monitor" "watchkeeper-monitor" {
-    name         = "MONITOR_WH_RM"
-    credit_quota = 15
-
-    frequency       = "MONTHLY"
-    start_timestamp = "IMMEDIATELY"
-
-    notify_triggers           = [50,60]
-    suspend_trigger           = 70
-    suspend_immediate_trigger = 80
-
-    notify_users = ["TERRAFORM"]
-}
-
-
-//WH CREATION
-resource "snowflake_warehouse" "watchkeeper-wh" {
-    name           = "MONITOR_WH"
-    warehouse_size = "XSMALL"
-    warehouse_type = "STANDARD" 
-    auto_suspend = 60
-    auto_resume = true
-    initially_suspended = true
-    resource_monitor="MONITOR_WH_RM"
-    max_concurrency_level = 30
-    statement_timeout_in_seconds = 300
-    statement_queued_timeout_in_seconds = 1200
-    comment="for watchkeeper usage"
-    //depends_on = [snowflake_resource_monitor.watchkeeper-monitor]
-}
-
-//DB CREATION
-resource "snowflake_database" "watchkeeper-db" {
-  name                        = "MONITOR_DB"
-  comment                     = "Database for watchkeeper accelerator"
-}
-
-// SNOWFLAKE DB GRANTS
-resource "snowflake_database_grant" "grant-imported-privileges-snowflake-WK" {
-    database_name = "SNOWFLAKE"
-    privilege     = "IMPORTED PRIVILEGES"
-    roles = [
-        snowflake_role.watchkeeper-admin-role.name,
-        snowflake_role.watchkeeper-user-role.name,
-        snowflake_role.watchkeeper-task-role.name
-    ]
 }
 
 
@@ -150,17 +167,7 @@ resource "snowflake_database_grant" "db-wk-grant2" {
 }
 
 
-//TASK GRANT
-resource "snowflake_account_grant" "acct-wk-grant1" {
-  roles             = [snowflake_role.watchkeeper-admin-role.name,snowflake_role.watchkeeper-task-role.name]
-  privilege         = "EXECUTE TASK"
-}
 
-//managed task grant
-resource "snowflake_account_grant" "acct-wk-grant2" {
-  roles             = [snowflake_role.watchkeeper-admin-role.name,snowflake_role.watchkeeper-task-role.name]
-  privilege         = "EXECUTE MANAGED TASK"
-}
 
 //future grant
 resource "snowflake_schema_grant" "future-grant-schema-wk" {
@@ -188,6 +195,9 @@ resource "snowflake_view_grant" "future-grant-view-wk" {
     on_future         = true
     //depends_on = [snowflake_database.watchkeeper-db]
 }
+
+
+/////////////////////third push
 //schema creation
 resource "snowflake_schema" "wk-schema1" {
   database = "MONITOR_DB"
@@ -213,4 +223,4 @@ resource "snowflake_schema" "wk-schema4" {
   //depends_on = [snowflake_database.watchkeeper-db]
 }
 
-
+*/
