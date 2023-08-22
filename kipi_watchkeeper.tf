@@ -75,7 +75,7 @@ resource "snowflake_warehouse" "watchkeeper-wh" {
     statement_timeout_in_seconds = 300
     statement_queued_timeout_in_seconds = 1200
     comment="for watchkeeper usage"
-    depends_on = [snowflake_resource_monitor.watchkeeper-monitor]
+    //depends_on = [snowflake_resource_monitor.watchkeeper-monitor]
 }
 
 //DB CREATION
@@ -104,7 +104,7 @@ resource "snowflake_warehouse_grant" "grant-wk-wh1" {
   roles = [snowflake_role.watchkeeper-admin-role.name,
   snowflake_role.watchkeeper-user-role.name,
   snowflake_role.watchkeeper-task-role.name]
-  depends_on = [snowflake_database.watchkeeper-wh]
+  //depends_on = [snowflake_database.watchkeeper-wh]
 }
 
 resource "snowflake_warehouse_grant" "grant-wk-wh2" {
@@ -112,7 +112,7 @@ resource "snowflake_warehouse_grant" "grant-wk-wh2" {
   privilege      = "monitor"
 
   roles = [snowflake_role.watchkeeper-admin-role.name,snowflake_role.watchkeeper-task-role.name]
-  depends_on = [snowflake_database.watchkeeper-wh]
+  //depends_on = [snowflake_database.watchkeeper-wh]
 }
 
 resource "snowflake_warehouse_grant" "grant-wk-wh3" {
@@ -120,7 +120,7 @@ resource "snowflake_warehouse_grant" "grant-wk-wh3" {
   privilege      = "modify"
 
   roles = [snowflake_role.watchkeeper-admin-role.name,snowflake_role.watchkeeper-task-role.name]
-  depends_on = [snowflake_database.watchkeeper-wh]
+  //depends_on = [snowflake_database.watchkeeper-wh]
 }
 
 resource "snowflake_warehouse_grant" "grant-wk-wh4" {
@@ -128,7 +128,7 @@ resource "snowflake_warehouse_grant" "grant-wk-wh4" {
   privilege      = "operate"
 
   roles = [snowflake_role.watchkeeper-admin-role.name,snowflake_role.watchkeeper-task-role.name]
-  depends_on = [snowflake_database.watchkeeper-wh]
+  //depends_on = [snowflake_database.watchkeeper-wh]
 }
 
 //DB GRANTS
@@ -138,7 +138,7 @@ resource "snowflake_database_grant" "db-wk-grant1" {
 
   privilege = "ALL PRIVILEGES"
   roles     = [snowflake_role.watchkeeper-admin-role.name,snowflake_role.watchkeeper-task-role.name]
-  depends_on = [snowflake_database.watchkeeper-db]
+  //depends_on = [snowflake_database.watchkeeper-db]
 }
 
 resource "snowflake_database_grant" "db-wk-grant2" {
@@ -146,7 +146,7 @@ resource "snowflake_database_grant" "db-wk-grant2" {
 
   privilege = "USAGE"
   roles     = [snowflake_role.watchkeeper-user-role.name]
-  depends_on = [snowflake_database.watchkeeper-db]
+  //depends_on = [snowflake_database.watchkeeper-db]
 }
 
 
@@ -168,7 +168,7 @@ resource "snowflake_schema_grant" "future-grant-schema-wk" {
     privilege = "USAGE"
     roles     = [snowflake_role.watchkeeper-user-role.name,snowflake_role.watchkeeper-task-role.name]
     on_future         = true
-    depends_on = [snowflake_database.watchkeeper-db]
+    //depends_on = [snowflake_database.watchkeeper-db]
 }
 
 resource "snowflake_table_grant" "future-grant-table-wk" {
@@ -177,7 +177,7 @@ resource "snowflake_table_grant" "future-grant-table-wk" {
     privilege = "SELECT"
     roles     = [snowflake_role.watchkeeper-user-role.name,snowflake_role.watchkeeper-task-role.name]
     on_future         = true
-    depends_on = [snowflake_database.watchkeeper-db]
+    //depends_on = [snowflake_database.watchkeeper-db]
 }
 
 resource "snowflake_view_grant" "future-grant-view-wk" {
@@ -186,31 +186,31 @@ resource "snowflake_view_grant" "future-grant-view-wk" {
     privilege = "SELECT"
     roles     = [snowflake_role.watchkeeper-user-role.name,snowflake_role.watchkeeper-task-role.name]
     on_future         = true
-    depends_on = [snowflake_database.watchkeeper-db]
+    //depends_on = [snowflake_database.watchkeeper-db]
 }
 //schema creation
 resource "snowflake_schema" "wk-schema1" {
   database = "MONITOR_DB"
   name     = "COMPUTE_CREDIT_MONITOR_SCHEMA"
-  depends_on = [snowflake_database.watchkeeper-db]
+  //depends_on = [snowflake_database.watchkeeper-db]
 }
 
 resource "snowflake_schema" "wk-schema2" {
   database = "MONITOR_DB"
   name     = "PERFORMANCE_MONITOR_SCHEMA"
-  depends_on = [snowflake_database.watchkeeper-db]
+  //depends_on = [snowflake_database.watchkeeper-db]
 }
 
 resource "snowflake_schema" "wk-schema3" {
   database = "MONITOR_DB"
   name     = "SECURITY_MONITOR_SCHEMA"
-  depends_on = [snowflake_database.watchkeeper-db]
+  //depends_on = [snowflake_database.watchkeeper-db]
 }
 
 resource "snowflake_schema" "wk-schema4" {
   database = "MONITOR_DB"
   name     = "TASK_MONITOR_SCHEMA"
-  depends_on = [snowflake_database.watchkeeper-db]
+  //depends_on = [snowflake_database.watchkeeper-db]
 }
 
 
