@@ -19,7 +19,7 @@ resource "snowflake_resource_monitor" "watchkeeper-monitor" {
     credit_quota = 15
 
     frequency       = "MONTHLY"
-    start_timestamp = "22-08-2023"
+    start_timestamp = "2023-08-22 00:00"
 
     notify_triggers           = [50,60]
     suspend_trigger           = 70
