@@ -43,7 +43,7 @@ resource "snowflake_resource_monitor" "new-monitor" {
 }
 
 resource "snowflake_resource_monitor" "new-monitor1" {
-    name         = "WH_RM"
+    name         = "WH_RM1"
     credit_quota = 15
 
     notify_triggers           = [50,60]
