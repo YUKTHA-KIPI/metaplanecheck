@@ -37,7 +37,7 @@ resource "snowflake_warehouse" "watchkeeper-wh" {
     auto_suspend = 60
     auto_resume = true
     initially_suspended = true
-    //resource_monitor="MONITOR_WH_RM"
+    resource_monitor="MONITOR_WH_RM"
     max_concurrency_level = 30
     statement_timeout_in_seconds = 300
     statement_queued_timeout_in_seconds = 1200
@@ -76,7 +76,7 @@ resource "snowflake_account_grant" "acct-wk-grant2" {
 }
 
 
-/*
+
 ////////////////////////////////second push
 
 //ADMIN ROLE GRANTS
@@ -196,7 +196,7 @@ resource "snowflake_view_grant" "future-grant-view-wk" {
     //depends_on = [snowflake_database.watchkeeper-db]
 }
 
-
+/*
 /////////////////////third push
 //schema creation
 resource "snowflake_schema" "wk-schema1" {
