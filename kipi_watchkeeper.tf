@@ -12,7 +12,7 @@ resource "snowflake_role" "watchkeeper-task-role" {
     name = "TASK_MONITOR_ADMIN"
 }
 
-/*
+
 //RM CREATION
 resource "snowflake_resource_monitor" "watchkeeper-monitor" {
     name         = "MONITOR_WH_RM"
@@ -26,7 +26,7 @@ resource "snowflake_resource_monitor" "watchkeeper-monitor" {
     suspend_immediate_trigger = 80
 
     notify_users = ["TERRAFORM"]
-}*/
+}
 
 
 //WH CREATION
