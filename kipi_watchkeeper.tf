@@ -41,6 +41,16 @@ resource "snowflake_resource_monitor" "new-monitor" {
 
     notify_users = ["TERRAFORM"]
 }
+
+resource "snowflake_resource_monitor" "new-monitor1" {
+    name         = "WH_RM"
+    credit_quota = 15
+
+    notify_triggers           = [50,60]
+    suspend_trigger           = 70
+    suspend_immediate_trigger = 80
+}
+
 //WH CREATION
 resource "snowflake_warehouse" "watchkeeper-wh" {
     name           = "MONITOR_WH"
