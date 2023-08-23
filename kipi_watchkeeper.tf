@@ -118,6 +118,7 @@ resource "snowflake_role_grants" "grant-watchkeeper-user" {
 
     roles = [
        snowflake_role.watchkeeper-admin-role.name
+       snowflake_role.watchkeeper-task-role.name
     ]
     users=[
         "TERRAFORM"
@@ -246,3 +247,33 @@ resource "snowflake_schema" "wk-schema4" {
 }
 
 
+resource "snowflake_schema_grant" "ownership1" {
+    schema_name   = snowflake_schema.wk-schema1.name
+    database_name = snowflake_database.watchkeeper-db.name
+    privilege     = "OWNERSHIP"
+    roles         = [snowflake_role.watchkeeper-admin-role.name]   
+}
+
+
+resource "snowflake_schema_grant" "ownership2" {
+    schema_name   = snowflake_schema.wk-schema2.name
+    database_name = snowflake_database.watchkeeper-db.name
+    privilege     = "OWNERSHIP"
+    roles         = [snowflake_role.watchkeeper-admin-role.name]   
+}
+
+
+resource "snowflake_schema_grant" "ownership3" {
+    schema_name   = snowflake_schema.wk-schema3.name
+    database_name = snowflake_database.watchkeeper-db.name
+    privilege     = "OWNERSHIP"
+    roles         = [snowflake_role.watchkeeper-admin-role.name]   
+}
+
+
+resource "snowflake_schema_grant" "ownership4" {
+    schema_name   = snowflake_schema.wk-schema4.name
+    database_name = snowflake_database.watchkeeper-db.name
+    privilege     = "OWNERSHIP"
+    roles         = [snowflake_role.watchkeeper-task-role.name]   
+}
