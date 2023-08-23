@@ -117,7 +117,7 @@ resource "snowflake_role_grants" "grant-watchkeeper-user" {
     role_name = snowflake_role.watchkeeper-user-role.name
 
     roles = [
-       snowflake_role.watchkeeper-admin-role.name
+       snowflake_role.watchkeeper-admin-role.name,
        snowflake_role.watchkeeper-task-role.name
     ]
     users=[
