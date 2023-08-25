@@ -1,6 +1,4 @@
-resource "snowflake_role" "check" {
- name    = "IMPORTCHECK"
-}
+
 resource "snowflake_role_grants" "grant-check" {
   role_name = "IMPORTCHECK"
   roles = [
@@ -8,7 +6,13 @@ resource "snowflake_role_grants" "grant-check" {
   ]
 }
 
-
+resource "snowflake_table_grant" "checktable" {
+  database_name = "MONITOR_DB"
+  schema_name="COMPUTE_CREDIT_MONITOR_SCHEMA"
+  privilege = "SELECT"
+  table_name = "CHECKING"
+  
+}
 
 //DEV ROLES
 resource "snowflake_role" "AMBYINT_DEV_READ_role" {
