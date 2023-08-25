@@ -23,3 +23,6 @@ jobs:
       - name: Terraform plan
         id: plan
         run: terraform plan -no-color
+      - name: terraform import
+        id: import
+        run: terraform import snowflake_role.check "IMPORTCHECK"
