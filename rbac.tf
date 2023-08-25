@@ -1,3 +1,8 @@
+resource "snowflake_role" "check" {
+  name    = "IMPORTCHECK"
+  comment = "For Ambyint check Read"
+}
+
 //DEV ROLES
 resource "snowflake_role" "AMBYINT_DEV_READ_role" {
   name    = "AMBYINT_DEV_READ"
