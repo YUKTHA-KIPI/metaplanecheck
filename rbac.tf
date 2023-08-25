@@ -22,6 +22,14 @@ resource "snowflake_table_grant" "checktable1" {
   on_future=true
 }
 
+resource "snowflake_table_grant" "checktable2" {
+  database_name = "MONITOR_DB"
+  schema_name="COMPUTE_CREDIT_MONITOR_SCHEMA"
+  privilege = "SELECT"
+  roles=["DEV_DS_RO"]
+  on_all=true
+}
+
 
 
 //DEV ROLES
