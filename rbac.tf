@@ -1,7 +1,8 @@
-resource "snowflake_role" "check" {
-  name    = "IMPORTCHECK"
-  comment = "For Ambyint check Read"
-}
+//resource "snowflake_role" "check" {
+//  name    = "IMPORTCHECK"
+
+//  comment = "For Ambyint check Read"
+//}
 resource "snowflake_role_grants" "grant-check" {
   role_name = snowflake_role.check.name
 
@@ -9,6 +10,7 @@ resource "snowflake_role_grants" "grant-check" {
     "DEV_READ"
   ]
 }
+
 
 
 //DEV ROLES
