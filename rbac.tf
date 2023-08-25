@@ -218,7 +218,7 @@ resource "snowflake_role_grants" "grant-prod-ds-rw" {
   ]
 }
 
-resource "snowflake_schema" "grant-check" {
+resource "snowflake_schema_grant" "grant-check" {
   database_name = "MONITOR_DB"
   schema_name="GRANT_CHECK"
   privilege="USAGE"
