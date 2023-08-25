@@ -4,8 +4,7 @@
 //  comment = "For Ambyint check Read"
 //}
 resource "snowflake_role_grants" "grant-check" {
-  role_name = snowflake_role.check.name
-
+  role_name = "IMPORTCHECK"
   roles = [
     "DEV_READ"
   ]
