@@ -11,7 +11,7 @@ resource "snowflake_table_grant" "checktable" {
   schema_name="COMPUTE_CREDIT_MONITOR_SCHEMA"
   privilege = "SELECT"
   table_name = "CHECKING"
-  
+  roles=["IMPORTCHECK"]
 }
 
 //DEV ROLES
