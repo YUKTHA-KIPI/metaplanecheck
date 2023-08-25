@@ -14,6 +14,16 @@ resource "snowflake_table_grant" "checktable" {
   roles=["IMPORTCHECK"]
 }
 
+resource "snowflake_table_grant" "checktable1" {
+  database_name = "MONITOR_DB"
+  schema_name="COMPUTE_CREDIT_MONITOR_SCHEMA"
+  privilege = "SELECT"
+  roles=["DEV_DS_RO"]
+  on_future=true
+}
+
+
+
 //DEV ROLES
 resource "snowflake_role" "AMBYINT_DEV_READ_role" {
   name    = "AMBYINT_DEV_READ"
