@@ -11,9 +11,18 @@ resource "snowflake_schema_grant" "name" {
   schema_name="GRANT_CHECK"
   privilege = "USAGE"
   roles=["IMPORTCHECK",
+  "DEV_READ"] 
+}
+
+resource "snowflake_schema_grant" "name1" {
+  database_name = "NEW"
+  schema_name="PUBLIC"
+  privilege = "USAGE"
+  roles=["IMPORTCHECK",
   "DEV_READ",
   "PROD_DS_RO"] 
 }
+
 
 resource "snowflake_table_grant" "checktable" {
   database_name = "MONITOR_DB"
