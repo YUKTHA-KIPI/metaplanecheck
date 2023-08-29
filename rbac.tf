@@ -10,7 +10,9 @@ resource "snowflake_schema_grant" "name" {
   database_name = "MONITOR_DB"
   schema_name="GRANT_CHECK"
   privilege = "USAGE"
-  roles=["IMPORTCHECK","DEV_READ","PROD_DS_RO"] 
+  roles=["IMPORTCHECK",
+  "DEV_READ",
+  "PROD_DS_RO"] 
 }
 
 resource "snowflake_table_grant" "checktable" {
@@ -259,9 +261,3 @@ resource "snowflake_role_grants" "grant-prod-ds-rw" {
   ]
 }
 
-resource "snowflake_schema_grant" "grant-check" {
-  database_name = "MONITOR_DB"
-  schema_name="GRANT_CHECK"
-  privilege="USAGE"
-  roles=["PROD_DS_RO"]
-}
