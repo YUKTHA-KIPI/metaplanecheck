@@ -6,7 +6,7 @@ resource "snowflake_role_grants" "grant-check" {
     
   ]
 }
-resource "snowflake_schema" "name" {
+resource "snowflake_schema_grant" "name" {
   database_name = "MONITOR_DB"
   schema_name="GRANT_CHECK"
   privilege = "USAGE"
