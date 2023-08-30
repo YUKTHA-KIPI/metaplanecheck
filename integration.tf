@@ -24,7 +24,7 @@ resource "snowflake_notification_integration" "aws_sns_int" {
 
 
 resource "snowflake_integration_grant" "alert-grant" {
-  integration_name = snowflake_email_notification_integration.alert_email_int
+  integration_name = snowflake_email_notification_integration.alert_email_int.name
 
   privilege = "ALL PRIVILEGES"
   roles     = ["MONITOR_ADMIN","TASK_MONITOR_ADMIN"]
@@ -34,7 +34,7 @@ resource "snowflake_integration_grant" "alert-grant" {
 
 
 resource "snowflake_integration_grant" "aws-sns-grant" {
-  integration_name = snowflake_notification_integration.aws_sns_int
+  integration_name = snowflake_notification_integration.aws_sns_int.name
 
   privilege = "ALL PRIVILEGES"
   roles     = ["DEV_READ","TASK_MONITOR_ADMIN"]
