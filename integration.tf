@@ -32,12 +32,6 @@ resource "snowflake_integration_grant" "alert-grant" {
   with_grant_option = false
 }
 
-resource "snowflake_account_grant" "execute-alert" {
-    privilege="EXECUTE ALERT"
-    roles=["MONITOR_ADMIN","TASK_MONITOR_ADMIN"
-    ]
-  
-}
 
 resource "snowflake_integration_grant" "aws-sns-grant" {
   integration_name = snowflake_notification_integration.aws_sns_int.name
