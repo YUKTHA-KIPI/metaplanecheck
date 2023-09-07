@@ -151,7 +151,7 @@ resource "snowflake_warehouse_grant" "grant-wk-wh2" {
   warehouse_name = "MONITOR_WH"
   privilege      = "monitor"
 
-  roles = ["MONITOR_ADMIN","TASK_MONITOR_ADMIN"]
+  roles = ["MONITOR_ADMIN"]
   //depends_on = [snowflake_database.watchkeeper-wh]
   with_grant_option = false
 }
