@@ -144,6 +144,7 @@ resource "snowflake_warehouse_grant" "grant-wk-wh1" {
   snowflake_role.watchkeeper-user-role.name,
   snowflake_role.watchkeeper-task-role.name]
   //depends_on = [snowflake_database.watchkeeper-wh]
+  with_grant_option = false
 }
 
 resource "snowflake_warehouse_grant" "grant-wk-wh2" {
@@ -152,6 +153,7 @@ resource "snowflake_warehouse_grant" "grant-wk-wh2" {
 
   roles = [snowflake_role.watchkeeper-admin-role.name,snowflake_role.watchkeeper-task-role.name]
   //depends_on = [snowflake_database.watchkeeper-wh]
+  with_grant_option = false
 }
 
 resource "snowflake_warehouse_grant" "grant-wk-wh3" {
@@ -160,6 +162,7 @@ resource "snowflake_warehouse_grant" "grant-wk-wh3" {
 
   roles = [snowflake_role.watchkeeper-admin-role.name,snowflake_role.watchkeeper-task-role.name]
   //depends_on = [snowflake_database.watchkeeper-wh]
+  with_grant_option = false
 }
 
 resource "snowflake_warehouse_grant" "grant-wk-wh4" {
@@ -168,6 +171,7 @@ resource "snowflake_warehouse_grant" "grant-wk-wh4" {
 
   roles = [snowflake_role.watchkeeper-admin-role.name,snowflake_role.watchkeeper-task-role.name]
   //depends_on = [snowflake_database.watchkeeper-wh]
+  with_grant_option = false
 }
 
 
