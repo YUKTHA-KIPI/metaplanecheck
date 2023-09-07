@@ -52,7 +52,7 @@ resource "snowflake_resource_monitor" "new-monitor1" {
 }
 
 //WH CREATION
-/*resource "snowflake_warehouse" "watchkeeper-wh" {
+resource "snowflake_warehouse" "watchkeeper-wh" {
     name           = "MONITOR_WH"
     warehouse_size = "XSMALL"
     warehouse_type = "STANDARD" 
@@ -66,7 +66,7 @@ resource "snowflake_resource_monitor" "new-monitor1" {
     comment="for watchkeeper usage"
     //depends_on = [snowflake_resource_monitor.watchkeeper-monitor]
 }
-*/
+
 //DB CREATION
 resource "snowflake_database" "watchkeeper-db" {
   name                        = "MONITOR_DB"
