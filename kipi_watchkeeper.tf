@@ -243,3 +243,46 @@ resource "snowflake_schema_grant" "ownership4" {
     privilege     = "OWNERSHIP"
     roles         = [snowflake_role.watchkeeper-task-role.name]   
 }
+
+
+
+
+
+
+
+
+
+//WH GRANTS
+resource "snowflake_warehouse_grant" "grant-wk-wh1" {
+  warehouse_name = "MONITOR_WH"
+  privilege      = "usage"
+
+  roles = [snowflake_role.watchkeeper-admin-role.name,
+  snowflake_role.watchkeeper-user-role.name,
+  snowflake_role.watchkeeper-task-role.name]
+  //depends_on = [snowflake_database.watchkeeper-wh]
+}
+
+resource "snowflake_warehouse_grant" "grant-wk-wh2" {
+  warehouse_name = "MONITOR_WH"
+  privilege      = "monitor"
+
+  roles = [snowflake_role.watchkeeper-admin-role.name,snowflake_role.watchkeeper-task-role.name]
+  //depends_on = [snowflake_database.watchkeeper-wh]
+}
+
+resource "snowflake_warehouse_grant" "grant-wk-wh3" {
+  warehouse_name = "MONITOR_WH"
+  privilege      = "modify"
+
+  roles = [snowflake_role.watchkeeper-admin-role.name,snowflake_role.watchkeeper-task-role.name]
+  //depends_on = [snowflake_database.watchkeeper-wh]
+}
+
+resource "snowflake_warehouse_grant" "grant-wk-wh4" {
+  warehouse_name = "MONITOR_WH"
+  privilege      = "operate"
+
+  roles = [snowflake_role.watchkeeper-admin-role.name,snowflake_role.watchkeeper-task-role.name]
+  //depends_on = [snowflake_database.watchkeeper-wh]
+}
