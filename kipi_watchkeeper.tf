@@ -52,7 +52,7 @@ resource "snowflake_resource_monitor" "new-monitor1" {
 }
 
 //WH CREATION
-resource "snowflake_warehouse" "watchkeeper-wh" {
+/*resource "snowflake_warehouse" "watchkeeper-wh" {
     name           = "MONITOR_WH"
     warehouse_size = "XSMALL"
     warehouse_type = "STANDARD" 
@@ -66,7 +66,7 @@ resource "snowflake_warehouse" "watchkeeper-wh" {
     comment="for watchkeeper usage"
     //depends_on = [snowflake_resource_monitor.watchkeeper-monitor]
 }
-
+*/
 //DB CREATION
 resource "snowflake_database" "watchkeeper-db" {
   name                        = "MONITOR_DB"
@@ -135,70 +135,6 @@ resource "snowflake_role_grants" "grant-watchkeeper-taskadmin" {
     users = ["TERRAFORM"]
 }
 
-//WH GRANTS
-resource "snowflake_warehouse_grant" "grant-wk-wh11" {
-  warehouse_name = "MONITOR_WH"
-  privilege      = "USAGE"
-  roles = [snowflake_role.watchkeeper-admin-role.name]
-  //depends_on = [snowflake_database.watchkeeper-wh]
-}
-resource "snowflake_warehouse_grant" "grant-wk-wh12" {
-  warehouse_name = "MONITOR_WH"
-  privilege      = "USAGE"
-  roles = [snowflake_role.watchkeeper-user-role.name]
-  //depends_on = [snowflake_database.watchkeeper-wh]
-}
-resource "snowflake_warehouse_grant" "grant-wk-wh13" {
-  warehouse_name = "MONITOR_WH"
-  privilege      = "USAGE"
-  roles = [snowflake_role.watchkeeper-task-role.name]
-  //depends_on = [snowflake_database.watchkeeper-wh]
-}
-resource "snowflake_warehouse_grant" "grant-wk-wh21" {
-  warehouse_name = "MONITOR_WH"
-  privilege      = "MONITOR"
-  roles = [snowflake_role.watchkeeper-admin-role.name]
-  //depends_on = [snowflake_database.watchkeeper-wh]
-}
-resource "snowflake_warehouse_grant" "grant-wk-wh22" {
-  warehouse_name = "MONITOR_WH"
-  privilege      = "MONITOR"
-  roles = [snowflake_role.watchkeeper-task-role.name]
-  //depends_on = [snowflake_database.watchkeeper-wh]
-}
-resource "snowflake_warehouse_grant" "grant-wk-wh31" {
-  warehouse_name = "MONITOR_WH"
-  privilege      = "MODIFY"
-  roles = [snowflake_role.watchkeeper-admin-role.name]
-  //depends_on = [snowflake_database.watchkeeper-wh]
-}
-resource "snowflake_warehouse_grant" "grant-wk-wh32" {
-  warehouse_name = "MONITOR_WH"
-  privilege      = "MODIFY"
-  roles = [snowflake_role.watchkeeper-task-role.name]
-  //depends_on = [snowflake_database.watchkeeper-wh]
-}
-resource "snowflake_warehouse_grant" "grant-wk-wh41" {
-  warehouse_name = "MONITOR_WH"
-  privilege      = "OPERATE"
-  roles = [snowflake_role.watchkeeper-admin-role.name]
-  //depends_on = [snowflake_database.watchkeeper-wh]
-}
-resource "snowflake_warehouse_grant" "grant-wk-wh42" {
-  warehouse_name = "MONITOR_WH"
-  privilege      = "OPERATE"
-  roles = [snowflake_role.watchkeeper-task-role.name]
-  //depends_on = [snowflake_database.watchkeeper-wh]
-}
-
-resource "snowflake_warehouse_grant" "grant-wk-wh4" {
-  warehouse_name = "MONITOR_WH"
-  privilege      = "operate"
-
-  roles = [snowflake_role.watchkeeper-admin-role.name,snowflake_role.watchkeeper-task-role.name]
-  //depends_on = [snowflake_database.watchkeeper-wh]
-  with_grant_option = false
-}
 
 
 //DB GRANTS
