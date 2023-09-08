@@ -74,7 +74,7 @@ resource "snowflake_database" "watchkeeper-db" {
 }
 
 // SNOWFLAKE DB GRANTS
-resource "snowflake_database_grant" "grant-imported-privileges-snowflake-WK" {
+/*resource "snowflake_database_grant" "grant-imported-privileges-snowflake-WK" {
     database_name = "SNOWFLAKE"
     privilege     = "IMPORTED PRIVILEGES"
     roles = [
@@ -83,7 +83,7 @@ resource "snowflake_database_grant" "grant-imported-privileges-snowflake-WK" {
         snowflake_role.watchkeeper-task-role.name
     ]
 }
-
+*/
 
 //TASK GRANT
 resource "snowflake_account_grant" "acct-wk-grant1" {

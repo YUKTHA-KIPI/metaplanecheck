@@ -283,8 +283,17 @@ resource "snowflake_role_grants" "grants-alert-db-role" {
 
 resource "snowflake_grant_privileges_to_role" "g4" {
   role_name = "MONITOR_USER"
-  on_database_object {
+  on_account_object {
     object_type = "DATABASE ROLE"
     object_name = "SNOWFLAKE.ALERT_VIEWER"
+  }
+}
+
+resource "snowflake_grant_privileges_to_role" "g3" {
+  privileges = ["IMPORTED PRIVILEGES"]
+  role_name  = snowflake_role.watchkeeper-admin-role.name
+  on_account_object {
+    object_type = "DATABASE"
+    object_name = "SNOWFLAKE"
   }
 }
