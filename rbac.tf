@@ -270,3 +270,12 @@ resource "snowflake_role_grants" "grant-prod-ds-rw" {
   ]
 }
 
+///alerts grants
+
+resource "snowflake_role_grants" "grants-alert-db-role" {
+  role_name = "SNOWFLAKE.ALERT_VIEWER"
+
+  roles = [
+    "MONITOR_USER"
+  ]
+}
