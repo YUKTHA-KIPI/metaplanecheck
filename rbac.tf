@@ -271,7 +271,7 @@ resource "snowflake_role_grants" "grant-prod-ds-rw" {
 }
 
 ///alerts grants
-
+/*
 resource "snowflake_database_role_grants" "grants-alert-db-role" {
   role_name = "SNOWFLAKE.ALERT_VIEWER"
 
@@ -279,7 +279,7 @@ resource "snowflake_database_role_grants" "grants-alert-db-role" {
     "MONITOR_USER"
   ]
 }
-
+*/
 /*
 resource "snowflake_grant_privileges_to_role" "g4" {
   role_name = "MONITOR_USER"
