@@ -280,7 +280,7 @@ resource "snowflake_role_grants" "grants-alert-db-role" {
   ]
 }
 */
-
+/*
 resource "snowflake_grant_privileges_to_role" "g4" {
   role_name = "MONITOR_USER"
   on_account_object {
@@ -288,7 +288,7 @@ resource "snowflake_grant_privileges_to_role" "g4" {
     object_name = "SNOWFLAKE.ALERT_VIEWER"
   }
 }
-
+*/
 resource "snowflake_grant_privileges_to_role" "g3" {
   privileges = ["IMPORTED PRIVILEGES"]
   role_name  = snowflake_role.watchkeeper-admin-role.name
