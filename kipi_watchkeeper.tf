@@ -85,7 +85,7 @@ resource "snowflake_database" "watchkeeper-db" {
 }
 */
 
-//TASK GRANT
+/*//TASK GRANT
 resource "snowflake_account_grant" "acct-wk-grant1" {
   roles             = [snowflake_role.watchkeeper-admin-role.name,snowflake_role.watchkeeper-task-role.name]
   privilege         = "EXECUTE TASK"
@@ -96,7 +96,7 @@ resource "snowflake_account_grant" "acct-wk-grant2" {
   roles             = [snowflake_role.watchkeeper-admin-role.name,snowflake_role.watchkeeper-task-role.name]
   privilege         = "EXECUTE MANAGED TASK"
 }
-
+*/
 
 
 ////////////////////////////////second push

@@ -289,11 +289,3 @@ resource "snowflake_grant_privileges_to_role" "g4" {
   }
 }
 */
-resource "snowflake_grant_privileges_to_role" "g3" {
-  privileges = ["IMPORTED PRIVILEGES"]
-  role_name  = snowflake_role.watchkeeper-admin-role.name
-  on_account_object {
-    object_type = "DATABASE"
-    object_name = "SNOWFLAKE"
-  }
-}
