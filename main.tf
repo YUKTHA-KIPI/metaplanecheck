@@ -11,7 +11,7 @@ terraform {
 
 provider "snowflake" {
   role = "ACCOUNTADMIN" 
-  account = "bh52760.ap-northeast-3.aws" 
+  account = "df84412.ap-south-1.aws" 
   private_key_path = ".github/workflows/snowflake_tf_snow_key.p8" 
   username = "tf-snow"
 
